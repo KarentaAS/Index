@@ -14,35 +14,33 @@
     header {
       background-color: #009688;
       color: white;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
-      font-size: 20px;
+      font-size: 24px;
       border-bottom: 4px solid #00796b;
     }
     .container {
-      padding: 15px;
-      max-width: 100%;
+      padding: 20px;
+      max-width: 1200px;
       margin: 0 auto;
-      box-sizing: border-box;
     }
     h1, h2 {
       color: #333;
-      margin: 0;
     }
     .section {
-      margin-bottom: 20px;
+      margin-bottom: 40px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
+      margin-top: 20px;
       background-color: white;
       border-radius: 5px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     th, td {
       border: 1px solid #ddd;
-      padding: 10px;
+      padding: 8px;
       text-align: left;
       font-size: 14px;
     }
@@ -60,7 +58,7 @@
       font-size: 14px;
     }
     button {
-      padding: 8px 15px;
+      padding: 10px 20px;
       background-color: #4caf50;
       color: white;
       border: none;
@@ -74,12 +72,14 @@
       border-radius: 4px;
       padding: 6px 10px;
       color: #a94442;
+      font-size: 14px;
     }
     button.confirm-btn {
       background-color: #fff2cc;
       color: #856404;
       border-radius: 4px;
       padding: 6px 10px;
+      font-size: 14px;
     }
     button:hover {
       opacity: 0.8;
@@ -96,14 +96,9 @@
     }
     .form-table {
       background-color: #fff;
-      padding: 15px;
+      padding: 20px;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .form-table td {
-      padding: 8px;
     }
     .action-column {
       position: relative;
@@ -113,18 +108,17 @@
       padding: 10px;
       border-radius: 4px;
       border: 1px solid #ccc;
-      font-size: 14px;
     }
     @media (max-width: 600px) {
-      header {
-        font-size: 18px;
-      }
       th, td {
-        font-size: 12px;
         padding: 8px;
+        font-size: 12px;
+      }
+      select, input {
+        font-size: 12px;
       }
       button {
-        padding: 6px 12px;
+        padding: 8px 16px;
         font-size: 12px;
       }
     }
@@ -206,7 +200,7 @@
     <!-- Form to Add New Cars -->
     <div class="section">
       <h2>Tambah Mobil Baru</h2>
-      <table class="form-table">
+      <table class="form-table" id="carForm">
         <tr>
           <td><label for="model">Model Mobil:</label></td>
           <td>
@@ -254,33 +248,30 @@
   <script>
     let cars = {
       'Avanza/Veloz': [
-        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1835 CY' },
-        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1836 CY' },
+        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1835 CY' },
+        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1836 CY' },
         { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1370 CY' },
-        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1893 CY' },
-        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1582 CY' }
+        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1893 CY' },
+        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1582 CY' }
       ],
       'Innova Reborn': [
-        { model: 'Innova Reborn', year: '2019', color: 'Abu', status: 'Available', plate: 'BP 7121 AT' },
-        { model: 'Innova Reborn', year: '2018', color: 'Abu', status: 'Available', plate: 'BP 7122 AT' },
-        { model: 'Innova Reborn', year: '2020', color: 'Abu', status: 'Available', plate: 'BP 7123 AT' },
-        { model: 'Innova Reborn', year: '2018', color: 'Abu', status: 'Available', plate: 'BP 7124 AT' }
+        { model: 'Innova Reborn', year: '2018', color: 'Abu', status: 'Available', plate: 'BP 7125 CY' },
+        { model: 'Innova Reborn', year: '2018', color: 'Silver', status: 'Available', plate: 'BP 1838 CY' },
+        { model: 'Innova Reborn', year: '2018', color: 'Hitam', status: 'Available', plate: 'BP 1562 CY' },
+        { model: 'Innova Reborn', year: '2018', color: 'Coklat', status: 'Available', plate: 'BP 1941 YC' }
       ],
       'Hiace': [
-        { model: 'Hiace', year: '2019', color: 'Putih', status: 'Available', plate: 'BP 1301 FZ' },
-        { model: 'Hiace', year: '2019', color: 'Putih', status: 'Available', plate: 'BP 1302 FZ' },
-        { model: 'Hiace', year: '2020', color: 'Putih', status: 'Available', plate: 'BP 1303 FZ' },
-        { model: 'Hiace', year: '2018', color: 'Putih', status: 'Available', plate: 'BP 1304 FZ' },
-        { model: 'Hiace', year: '2020', color: 'Putih', status: 'Available', plate: 'BP 1305 FZ' }
+        { model: 'Hiace', year: '2018', color: 'Silver', status: 'Available', plate: 'B 7056 SAA' },
+        { model: 'Hiace', year: '2018', color: 'Putih', status: 'Available', plate: 'BP 7028 KY' }
       ]
     };
 
-    function populateTable() {
-      for (let type in cars) {
-        const tableBody = document.getElementById(type.toLowerCase().replace('/', '').replace(' ', '') + 'TableBody');
+    function updateTable() {
+      Object.keys(cars).forEach(model => {
+        let tableBody = document.getElementById(`${model.toLowerCase().replace(/ /g, '')}TableBody`);
         tableBody.innerHTML = '';
-        cars[type].forEach(car => {
-          const row = document.createElement('tr');
+        cars[model].forEach(car => {
+          let row = document.createElement('tr');
           row.innerHTML = `
             <td>${car.model}</td>
             <td>${car.year}</td>
@@ -288,65 +279,56 @@
             <td>${car.color}</td>
             <td>${car.plate}</td>
             <td class="action-column">
-              <button class="delete-btn" onclick="confirmDelete('${car.plate}', '${type}')">Hapus</button>
+              <button class="delete-btn" onclick="confirmDelete('${car.model}', '${car.plate}')">Hapus</button>
             </td>
           `;
           tableBody.appendChild(row);
         });
-      }
-    }
-
-    function addCar() {
-      const model = document.getElementById('model').value;
-      const year = document.getElementById('year').value;
-      const color = document.getElementById('color').value;
-      const status = document.getElementById('status').value;
-      const plate = document.getElementById('plate').value;
-      if (!model || !year || !color || !status || !plate) {
-        alert('Harap isi semua field!');
-        return;
-      }
-      const car = { model, year, color, status, plate };
-      if (cars[model]) {
-        cars[model].push(car);
-        populateTable();
-        document.getElementById('model').value = '';
-        document.getElementById('year').value = '';
-        document.getElementById('color').value = '';
-        document.getElementById('status').value = '';
-        document.getElementById('plate').value = '';
-      }
-    }
-
-    function confirmDelete(plate, type) {
-      if (confirm('Apakah Anda yakin ingin menghapus mobil ini?')) {
-        cars[type] = cars[type].filter(car => car.plate !== plate);
-        populateTable();
-      }
-    }
-
-    function searchTable() {
-      const input = document.getElementById('searchBar');
-      const filter = input.value.toLowerCase();
-      const tables = document.querySelectorAll('table');
-      tables.forEach(table => {
-        const rows = table.getElementsByTagName('tr');
-        for (let i = 1; i < rows.length; i++) {
-          const cells = rows[i].getElementsByTagName('td');
-          let visible = false;
-          for (let j = 0; j < cells.length; j++) {
-            if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
-              visible = true;
-              break;
-            }
-          }
-          rows[i].style.display = visible ? '' : 'none';
-        }
       });
     }
 
-    document.addEventListener('DOMContentLoaded', populateTable);
-  </script>
+    function addCar() {
+      let model = document.getElementById('model').value;
+      let year = document.getElementById('year').value;
+      let color = document.getElementById('color').value;
+      let status = document.getElementById('status').value;
+      let plate = document.getElementById('plate').value;
 
+      if (!model || !year || !color || !status || !plate) {
+        alert('Semua field harus diisi!');
+        return;
+      }
+
+      cars[model].push({ model, year, color, status, plate });
+      updateTable();
+      document.getElementById('carForm').reset();
+    }
+
+    function searchTable() {
+      let input = document.getElementById('searchBar').value.toLowerCase();
+      ['avanzaTableBody', 'innovaTableBody', 'hiaceTableBody'].forEach(tableBodyId => {
+        let tableBody = document.getElementById(tableBodyId);
+        let rows = tableBody.getElementsByTagName('tr');
+        Array.from(rows).forEach(row => {
+          let cells = row.getElementsByTagName('td');
+          let match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(input));
+          row.style.display = match ? '' : 'none';
+        });
+      });
+    }
+
+    function confirmDelete(model, plate) {
+      if (confirm(`Apakah Anda yakin ingin menghapus mobil ${model} dengan nomor plat ${plate}?`)) {
+        deleteCar(model, plate);
+      }
+    }
+
+    function deleteCar(model, plate) {
+      cars[model] = cars[model].filter(car => car.plate !== plate);
+      updateTable();
+    }
+
+    updateTable(); // Initial call to populate tables with existing cars
+  </script>
 </body>
 </html>
