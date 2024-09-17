@@ -104,242 +104,221 @@
       border-radius: 4px;
       border: 1px solid #ccc;
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        font-size: 20px;
+        padding: 15px;
+      }
+      .container {
+        padding: 10px;
+      }
+      table, th, td {
+        font-size: 14px;
+        padding: 10px;
+      }
+      button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 18px;
+        padding: 10px;
+      }
+      .container {
+        padding: 5px;
+      }
+      table, th, td {
+        font-size: 12px;
+        padding: 8px;
+      }
+      button {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Karenta Stok Mobil</h1>
+    Karenta Stok Mobil
   </header>
-
   <div class="container">
+    <h1>Selamat Datang di Halaman Stok Mobil</h1>
+    <p>Halaman ini membantu Anda melacak mobil yang tersedia.</p>
 
-    <!-- Search Bar Section -->
     <div class="section">
-      <input type="text" id="searchBar" class="search-bar" placeholder="Cari mobil..." onkeyup="searchTable()">
-    </div>
-
-    <!-- Toyota Avanza Veloz Table -->
-    <div class="section">
-      <h2>Toyota Avanza Veloz</h2>
+      <h2>Mobil Avanza/Veloz</h2>
       <table id="avanzaTable">
         <thead>
           <tr>
             <th>Model Mobil</th>
             <th>Tahun</th>
             <th>Status</th>
-            <th>Warna</th>
             <th>Nomor Plat</th>
+            <th>Warna</th>
             <th>Aksi</th>
           </tr>
         </thead>
-        <tbody id="avanzaTableBody">
-          <!-- Avanza Veloz rows will be added here dynamically -->
+        <tbody>
+          <!-- Data Avanza/Veloz akan ditambahkan di sini -->
         </tbody>
       </table>
     </div>
 
-    <!-- Toyota Innova Reborn Table -->
     <div class="section">
-      <h2>Toyota Innova Reborn</h2>
+      <h2>Mobil Innova Reborn</h2>
       <table id="innovaTable">
         <thead>
           <tr>
             <th>Model Mobil</th>
             <th>Tahun</th>
             <th>Status</th>
-            <th>Warna</th>
             <th>Nomor Plat</th>
+            <th>Warna</th>
             <th>Aksi</th>
           </tr>
         </thead>
-        <tbody id="innovaTableBody">
-          <!-- Innova Reborn rows will be added here dynamically -->
+        <tbody>
+          <!-- Data Innova Reborn akan ditambahkan di sini -->
         </tbody>
       </table>
     </div>
 
-    <!-- Toyota Hiace Table -->
     <div class="section">
-      <h2>Toyota Hiace</h2>
+      <h2>Mobil Hiace</h2>
       <table id="hiaceTable">
         <thead>
           <tr>
             <th>Model Mobil</th>
             <th>Tahun</th>
             <th>Status</th>
-            <th>Warna</th>
             <th>Nomor Plat</th>
+            <th>Warna</th>
             <th>Aksi</th>
           </tr>
         </thead>
-        <tbody id="hiaceTableBody">
-          <!-- Hiace rows will be added here dynamically -->
+        <tbody>
+          <!-- Data Hiace akan ditambahkan di sini -->
         </tbody>
       </table>
     </div>
 
-    <!-- Form to Add New Cars -->
     <div class="section">
       <h2>Tambah Mobil Baru</h2>
-      <table class="form-table">
-        <tr>
-          <td><label for="model">Model Mobil:</label></td>
-          <td>
-            <select id="model" name="model">
-              <option value="Avanza/Veloz">Toyota Avanza Veloz</option>
-              <option value="Innova Reborn">Toyota Innova Reborn</option>
-              <option value="Hiace">Toyota Hiace</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td><label for="year">Tahun:</label></td>
-          <td><input type="text" id="year" name="year" required></td>
-        </tr>
-        <tr>
-          <td><label for="color">Warna:</label></td>
-          <td><input type="text" id="color" name="color" required></td>
-        </tr>
-        <tr>
-          <td><label for="status">Status:</label></td>
-          <td>
-            <select id="status" name="status">
-              <option value="Available">Tersedia</option>
-              <option value="Rented">Disewa</option>
-              <option value="Washing">Dicuci</option>
-              <option value="Maintenance">Perawatan</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td><label for="plate">Nomor Plat:</label></td>
-          <td><input type="text" id="plate" name="plate" required></td>
-        </tr>
-        <tr>
-          <td colspan="2" style="text-align: right;">
-            <button type="button" onclick="addCar()">Tambah Mobil</button>
-          </td>
-        </tr>
-      </table>
+      <form id="carForm">
+        <label for="model">Model Mobil:</label>
+        <select id="model" name="model">
+          <option value="Avanza/Veloz">Avanza/Veloz</option>
+          <option value="Innova Reborn">Innova Reborn</option>
+          <option value="Hiace">Hiace</option>
+        </select>
+        <br><br>
+        <label for="year">Tahun:</label>
+        <input type="text" id="year" name="year" required>
+        <br><br>
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+          <option value="Available">Tersedia</option>
+          <option value="Rented">Disewa</option>
+          <option value="Washing">Dicuci</option>
+          <option value="Maintenance">Perawatan</option>
+        </select>
+        <br><br>
+        <label for="plate">Nomor Plat:</label>
+        <input type="text" id="plate" name="plate" required>
+        <br><br>
+        <label for="color">Warna:</label>
+        <input type="text" id="color" name="color" required>
+        <br><br>
+        <button type="button" onclick="addCar()">Tambah Mobil</button>
+      </form>
     </div>
 
-  </div>
+    <div class="section">
+      <h2>Tugas Hari Ini</h2>
+      <ol>
+        <li>Periksa ketersediaan semua mobil.</li>
+        <li>Perbarui stok mobil yang telah dikembalikan.</li>
+        <li>Periksa mobil untuk perawatan.</li>
+      </ol>
+    </div>
 
-  <!-- JavaScript Functions -->
-  <script>
-    let cars = {
-      'Avanza/Veloz': [
-        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1835 CY' },
-        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1836 CY' },
-        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1370 CY' },
-        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1893 CY' },
-        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1582 CY' }
-      ],
-      'Innova Reborn': [
-        { model: 'Innova Reborn', year: '2018', color: 'Grey', status: 'Available', plate: 'BP 7125 CY' },
-        { model: 'Innova Reborn', year: '2018', color: 'Silver', status: 'Available', plate: 'BP 1838 CY' },
-        { model: 'Innova Reborn', year: '2018', color: 'Black', status: 'Available', plate: 'BP 1562 CY' },
-        { model: 'Innova Reborn', year: '2018', color: 'Brown', status: 'Available', plate: 'BP 1941 YC' }
-      ],
-      'Hiace': [
-        { model: 'Hiace', year: '2018', color: 'Silver', status: 'Available', plate: 'B 7056 SAA' },
-        { model: 'Hiace', year: '2018', color: 'Silver', status: 'Available', plate: 'BP 7028 KY' }
-      ]
-    };
+    <p>Jika Anda membutuhkan bantuan, <a href="mailto:support@carrentals.com">hubungi dukungan</a>.</p>
 
-    function updateTable() {
-      const tables = {
-        'Avanza/Veloz': 'avanzaTableBody',
-        'Innova Reborn': 'innovaTableBody',
-        'Hiace': 'hiaceTableBody'
-      };
+    <script>
+      function addCar() {
+        var model = document.getElementById('model').value;
+        var year = document.getElementById('year').value;
+        var status = document.getElementById('status').value;
+        var plate = document.getElementById('plate').value;
+        var color = document.getElementById('color').value;
 
-      for (const [model, tableId] of Object.entries(tables)) {
-        const tableBody = document.getElementById(tableId);
-        tableBody.innerHTML = '';
+        var tableId = model === 'Avanza/Veloz' ? 'avanzaTable' : 
+                      model === 'Innova Reborn' ? 'innovaTable' : 
+                      'hiaceTable';
 
-        cars[model].forEach((car, index) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${car.model}</td>
-            <td>${car.year}</td>
-            <td>
-              <select onchange="updateStatus(this, '${model}', ${index})">
-                <option value="Available" ${car.status === 'Available' ? 'selected' : ''}>Tersedia</option>
-                <option value="Washing" ${car.status === 'Washing' ? 'selected' : ''}>Dicuci</option>
-                <option value="Rented" ${car.status === 'Rented' ? 'selected' : ''}>Disewa</option>
-                <option value="Maintenance" ${car.status === 'Maintenance' ? 'selected' : ''}>Perawatan</option>
-              </select>
-            </td>
-            <td>${car.color}</td>
-            <td>${car.plate}</td>
-            <td class="action-column">
-              <button class="delete-btn" onclick="confirmDelete(this, '${model}', ${index})">Hapus</button>
-              <div class="delete-confirmation">
-                <button class="confirm-btn" onclick="deleteCar(this, '${model}', ${index})">Konfirmasi Hapus</button>
-                <button class="cancel-btn" onclick="cancelDelete(this)">Batal</button>
-              </div>
-            </td>
-          `;
-          tableBody.appendChild(row);
+        var table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+        var row = table.insertRow(-1);
+
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+
+        cell1.innerHTML = model;
+        cell2.innerHTML = year;
+        cell3.innerHTML = `<select onchange="changeStatus(this)"><option value="Available" ${status === 'Available' ? 'selected' : ''}>Tersedia</option><option value="Rented" ${status === 'Rented' ? 'selected' : ''}>Disewa</option><option value="Washing" ${status === 'Washing' ? 'selected' : ''}>Dicuci</option><option value="Maintenance" ${status === 'Maintenance' ? 'selected' : ''}>Perawatan</option></select>`;
+        cell4.innerHTML = plate;
+        cell5.innerHTML = color;
+        cell6.innerHTML = `<button class="delete-btn" onclick="confirmDelete(this)">Hapus</button>`;
+
+        document.getElementById('carForm').reset();
+      }
+
+      function changeStatus(selectElement) {
+        var row = selectElement.parentNode.parentNode;
+        var status = selectElement.value;
+        row.cells[2].innerHTML = `<select onchange="changeStatus(this)"><option value="Available" ${status === 'Available' ? 'selected' : ''}>Tersedia</option><option value="Rented" ${status === 'Rented' ? 'selected' : ''}>Disewa</option><option value="Washing" ${status === 'Washing' ? 'selected' : ''}>Dicuci</option><option value="Maintenance" ${status === 'Maintenance' ? 'selected' : ''}>Perawatan</option></select>`;
+        sortTables();
+      }
+
+      function confirmDelete(button) {
+        var row = button.parentNode.parentNode;
+        var confirmation = confirm('Apakah Anda yakin ingin menghapus baris ini?');
+        if (confirmation) {
+          row.parentNode.removeChild(row);
+        }
+      }
+
+      function sortTables() {
+        var tables = ['avanzaTable', 'innovaTable', 'hiaceTable'];
+        tables.forEach(function(tableId) {
+          var table = document.getElementById(tableId);
+          var tbody = table.getElementsByTagName('tbody')[0];
+          var rows = Array.from(tbody.getElementsByTagName('tr'));
+
+          rows.sort(function(a, b) {
+            var statusA = a.cells[2].getElementsByTagName('select')[0].value;
+            var statusB = b.cells[2].getElementsByTagName('select')[0].value;
+
+            var priority = { 'Available': 1, 'Washing': 2, 'Rented': 3, 'Maintenance': 4 };
+
+            return priority[statusA] - priority[statusB];
+          });
+
+          rows.forEach(function(row) {
+            tbody.appendChild(row);
+          });
         });
       }
-    }
-
-    function addCar() {
-      const model = document.getElementById('model').value;
-      const year = document.getElementById('year').value;
-      const color = document.getElementById('color').value;
-      const status = document.getElementById('status').value;
-      const plate = document.getElementById('plate').value;
-
-      if (!model || !year || !color || !status || !plate) {
-        alert('Semua kolom harus diisi!');
-        return;
-      }
-
-      cars[model].push({ model, year, color, status, plate });
-      updateTable();
-      document.getElementById('carForm').reset();
-    }
-
-    function updateStatus(select, model, index) {
-      cars[model][index].status = select.value;
-    }
-
-    function confirmDelete(button, model, index) {
-      const confirmationDiv = button.nextElementSibling;
-      confirmationDiv.style.display = 'block';
-    }
-
-    function deleteCar(button, model, index) {
-      cars[model].splice(index, 1);
-      updateTable();
-    }
-
-    function cancelDelete(button) {
-      button.parentElement.style.display = 'none';
-    }
-
-    function searchTable() {
-      const searchText = document.getElementById('searchBar').value.toLowerCase();
-      const tableBodies = document.querySelectorAll('tbody');
-
-      tableBodies.forEach((tbody) => {
-        const rows = tbody.getElementsByTagName('tr');
-        for (let i = 0; i < rows.length; i++) {
-          const row = rows[i];
-          const modelCell = row.getElementsByTagName('td')[0];
-          const modelText = modelCell.textContent.toLowerCase();
-          row.style.display = modelText.includes(searchText) ? '' : 'none';
-        }
-      });
-    }
-
-    // Initialize the tables with the current data
-    updateTable();
-  </script>
-
+    </script>
+  </div>
 </body>
 </html>
