@@ -261,7 +261,6 @@
         { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1582 CY' }
       ],
       'Innova Reborn': [
-        { model: 'Innova Reborn', year: '2018', color: 'Abu', status: 'Available', plate: 'BP 7120 AT' },
         { model: 'Innova Reborn', year: '2019', color: 'Abu', status: 'Available', plate: 'BP 7121 AT' },
         { model: 'Innova Reborn', year: '2018', color: 'Abu', status: 'Available', plate: 'BP 7122 AT' },
         { model: 'Innova Reborn', year: '2020', color: 'Abu', status: 'Available', plate: 'BP 7123 AT' },
@@ -278,7 +277,7 @@
 
     function populateTable() {
       for (let type in cars) {
-        const tableBody = document.getElementById(type.toLowerCase().replace(' ', '') + 'TableBody');
+        const tableBody = document.getElementById(type.toLowerCase().replace('/', '').replace(' ', '') + 'TableBody');
         tableBody.innerHTML = '';
         cars[type].forEach(car => {
           const row = document.createElement('tr');
