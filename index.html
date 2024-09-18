@@ -40,9 +40,9 @@
     }
     th, td {
       border: 1px solid #ddd;
-      padding: 8px;
+      padding: 12px;
       text-align: left;
-      font-size: 14px;
+      word-wrap: break-word; /* Ensure content wraps correctly */
     }
     th {
       background-color: #004d40;
@@ -55,7 +55,6 @@
       box-sizing: border-box;
       border-radius: 4px;
       border: 1px solid #ccc;
-      font-size: 14px;
     }
     button {
       padding: 10px 20px;
@@ -65,21 +64,18 @@
       border-radius: 4px;
       cursor: pointer;
       margin-top: 10px;
-      font-size: 14px;
     }
     button.delete-btn {
       background-color: #ffcccc;
       border-radius: 4px;
       padding: 6px 10px;
       color: #a94442;
-      font-size: 14px;
     }
     button.confirm-btn {
       background-color: #fff2cc;
       color: #856404;
       border-radius: 4px;
       padding: 6px 10px;
-      font-size: 14px;
     }
     button:hover {
       opacity: 0.8;
@@ -109,17 +105,32 @@
       border-radius: 4px;
       border: 1px solid #ccc;
     }
-    @media (max-width: 600px) {
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
       th, td {
-        padding: 8px;
-        font-size: 12px;
+        display: block;
+        text-align: right;
+        padding: 10px;
+        box-sizing: border-box;
       }
-      select, input {
-        font-size: 12px;
+      th {
+        text-align: center;
+        background-color: #00796b;
+        color: white;
       }
-      button {
-        padding: 8px 16px;
-        font-size: 12px;
+      td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+      }
+      td:last-child {
+        text-align: left;
       }
     }
   </style>
@@ -248,11 +259,11 @@
   <script>
     let cars = {
       'Avanza/Veloz': [
-        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1835 CY' },
-        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1836 CY' },
+        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1835 CY' },
+        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1836 CY' },
         { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1370 CY' },
-        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1893 CY' },
-        { model: 'Avanza/Veloz', year: '2020', color: 'Silver', status: 'Available', plate: 'BP 1582 CY' }
+        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1893 CY' },
+        { model: 'Avanza/Veloz', year: '2019', color: 'Silver', status: 'Available', plate: 'BP 1582 CY' }
       ],
       'Innova Reborn': [
         { model: 'Innova Reborn', year: '2018', color: 'Abu', status: 'Available', plate: 'BP 7125 CY' },
@@ -262,40 +273,64 @@
       ],
       'Hiace': [
         { model: 'Hiace', year: '2018', color: 'Silver', status: 'Available', plate: 'B 7056 SAA' },
-        { model: 'Hiace', year: '2018', color: 'Putih', status: 'Available', plate: 'BP 7028 KY' }
+        { model: 'Hiace', year: '2018', color: 'Silver', status: 'Available', plate: 'BP 7028 KY' }
       ]
     };
 
     function updateTable() {
-      Object.keys(cars).forEach(model => {
-        let tableBody = document.getElementById(`${model.toLowerCase().replace(/ /g, '')}TableBody`);
+      const tables = {
+        'Avanza/Veloz': 'avanzaTableBody',
+        'Innova Reborn': 'innovaTableBody',
+        'Hiace': 'hiaceTableBody'
+      };
+
+      for (const [model, tableId] of Object.entries(tables)) {
+        const tableBody = document.getElementById(tableId);
         tableBody.innerHTML = '';
-        cars[model].forEach(car => {
-          let row = document.createElement('tr');
+
+        // Sort cars based on status
+        const sortedCars = cars[model].sort((a, b) => {
+          const priority = { 'Available': 1, 'Washing': 2, 'Rented': 3, 'Maintenance': 4 };
+          return priority[a.status] - priority[b.status];
+        });
+
+        sortedCars.forEach((car, index) => {
+          const row = document.createElement('tr');
           row.innerHTML = `
             <td>${car.model}</td>
             <td>${car.year}</td>
-            <td>${car.status}</td>
+            <td>
+              <select onchange="updateStatus(this, '${model}', ${index})">
+                <option value="Available" ${car.status === 'Available' ? 'selected' : ''}>Tersedia</option>
+                <option value="Washing" ${car.status === 'Washing' ? 'selected' : ''}>Dicuci</option>
+                <option value="Rented" ${car.status === 'Rented' ? 'selected' : ''}>Disewa</option>
+                <option value="Maintenance" ${car.status === 'Maintenance' ? 'selected' : ''}>Perawatan</option>
+              </select>
+            </td>
             <td>${car.color}</td>
             <td>${car.plate}</td>
             <td class="action-column">
-              <button class="delete-btn" onclick="confirmDelete('${car.model}', '${car.plate}')">Hapus</button>
+              <button class="delete-btn" onclick="confirmDelete(this, '${model}', ${index})">Hapus</button>
+              <div class="delete-confirmation">
+                <button class="confirm-btn" onclick="deleteCar(this, '${model}', ${index})">Konfirmasi Hapus</button>
+                <button class="cancel-btn" onclick="cancelDelete(this)">Batal</button>
+              </div>
             </td>
           `;
           tableBody.appendChild(row);
         });
-      });
+      }
     }
 
     function addCar() {
-      let model = document.getElementById('model').value;
-      let year = document.getElementById('year').value;
-      let color = document.getElementById('color').value;
-      let status = document.getElementById('status').value;
-      let plate = document.getElementById('plate').value;
+      const model = document.getElementById('model').value;
+      const year = document.getElementById('year').value;
+      const color = document.getElementById('color').value;
+      const status = document.getElementById('status').value;
+      const plate = document.getElementById('plate').value;
 
       if (!model || !year || !color || !status || !plate) {
-        alert('Semua field harus diisi!');
+        alert('Semua kolom harus diisi!');
         return;
       }
 
@@ -304,31 +339,43 @@
       document.getElementById('carForm').reset();
     }
 
-    function searchTable() {
-      let input = document.getElementById('searchBar').value.toLowerCase();
-      ['avanzaTableBody', 'innovaTableBody', 'hiaceTableBody'].forEach(tableBodyId => {
-        let tableBody = document.getElementById(tableBodyId);
-        let rows = tableBody.getElementsByTagName('tr');
-        Array.from(rows).forEach(row => {
-          let cells = row.getElementsByTagName('td');
-          let match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(input));
-          row.style.display = match ? '' : 'none';
-        });
-      });
+    function updateStatus(select, model, index) {
+      cars[model][index].status = select.value;
+      updateTable(); // Update table after status change
     }
 
-    function confirmDelete(model, plate) {
-      if (confirm(`Apakah Anda yakin ingin menghapus mobil ${model} dengan nomor plat ${plate}?`)) {
-        deleteCar(model, plate);
-      }
+    function confirmDelete(button, model, index) {
+      const confirmationDiv = button.nextElementSibling;
+      confirmationDiv.style.display = 'block';
     }
 
-    function deleteCar(model, plate) {
-      cars[model] = cars[model].filter(car => car.plate !== plate);
+    function deleteCar(button, model, index) {
+      cars[model].splice(index, 1);
       updateTable();
     }
 
-    updateTable(); // Initial call to populate tables with existing cars
+    function cancelDelete(button) {
+      button.parentElement.style.display = 'none';
+    }
+
+    function searchTable() {
+      const searchText = document.getElementById('searchBar').value.toLowerCase();
+      const tableBodies = document.querySelectorAll('tbody');
+
+      tableBodies.forEach((tbody) => {
+        const rows = tbody.getElementsByTagName('tr');
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          const modelCell = row.getElementsByTagName('td')[0];
+          const modelText = modelCell.textContent.toLowerCase();
+          row.style.display = modelText.includes(searchText) ? '' : 'none';
+        }
+      });
+    }
+
+    // Initialize the tables with the current data
+    updateTable();
   </script>
+
 </body>
 </html>
